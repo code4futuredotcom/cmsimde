@@ -27,12 +27,14 @@ channel = "stable-21_11"
   env = { LD_LIBRARY_PATH = "$PYTHON_LD_LIBRARY_PATH" }
 
 [env]
-VIRTUAL_ENV = "/home/runner/${REPL_SLUG}/venv"
+XDG_CONFIG_HOME = "$REPL_HOME/.config"
 PATH = "${VIRTUAL_ENV}/bin"
+npm_config_prefix = "$REPL_HOME/.config/npm/node_global"
 PYTHONPATH = "${VIRTUAL_ENV}/lib/python3.10/site-packages"
 REPLIT_POETRY_PYPI_REPOSITORY = "https://package-proxy.replit.com/pypi/"
 MPLBACKEND = "TkAgg"
 POETRY_CACHE_DIR = "${HOME}/${REPL_SLUG}/.cache/pypoetry"
+VIRTUAL_ENV = "/home/runner/${REPL_SLUG}/venv"
 
 # Enable unit tests. This is only supported for a few languages.
 [unitTest]
@@ -106,3 +108,7 @@ start = "pylsp"
 
 [deployment]
 run = ["sh", "-c", "python3 main.py"]
+
+[[hints]]
+regex = 'Error \[ERR_REQUIRE_ESM\]'
+message = "We see that you are using require(...) inside your code. We currently do not support this syntax. Please use 'import' instead when using external modules. (https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import)"
